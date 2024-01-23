@@ -42,11 +42,12 @@ export class InvitationController implements OnModuleInit {
    *
    * @return {Promise<void>}
    */
-  async processCustomers(): Promise<void> {
+  async processCustomers(): Promise<string> {
     const invitedCustomers = this.invitationService.filterCustomersByDistance(
       this.customerData,
     );
     this.invitationService.publishInvitedCustomers(invitedCustomers);
+    return 'Data processed. Check console for result.';
   }
 
   @MessagePattern('invitedCustomers')
