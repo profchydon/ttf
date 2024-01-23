@@ -52,7 +52,6 @@ PUT /todos/:id: Update a todo by ID
 }
 ```
 
-
 ## Fintech CO.
 - FINTECH CO. celebrates its company anniversary and wants to invite all customers (in
 customers.txt) located within a 100km radius. In order to be able to plan the event, we need
@@ -68,3 +67,5 @@ should not be terminated by that.
 - Please publish out all customer IDs of customers that should be invited in alphabetical
 order(ascending) to a message broker (e.g. RabbitMQ) and set up a simple client
 that reads the messages from the broker and prints them to the console.
+
+To view result for invited customers, visit http://localhost:3800/send/invitation
