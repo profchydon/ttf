@@ -68,3 +68,6 @@ should not be terminated by that.
 - Please publish out all customer IDs of customers that should be invited in alphabetical
 order(ascending) to a message broker (e.g. RabbitMQ) and set up a simple client
 that reads the messages from the broker and prints them to the console.
+
+
+To view result for invited customers, visit http://localhost:3800/send/invitation
