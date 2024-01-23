@@ -88,20 +88,26 @@
 # # Define the command to start your application in development mode
 # ENTRYPOINT ["/bin/sh", "-c", "npm run start:dev"]
 
-FROM node
+FROM node:18-alpine
 
 WORKDIR /usr/src/app
 
 COPY package*.json .
 
+COPY tsconfig.* .
+
+COPY prisma .
+
 RUN yarn install
 
-# RUN yarn remove @nestjs/config @nestjs/core @nestjs/platform-express
-
-# RUN yarn add @nestjs/config @nestjs/core @nestjs/platform-express
-
 RUN yarn upgrade
+
+RUN yarn build
+
+RUN npx prisma generate
 
 COPY . .
 
 EXPOSE 3800
+
+CMD npx prisma migrate deploy ; node --max-http-header-size 50000 dist/main.js 

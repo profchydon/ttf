@@ -9,8 +9,6 @@ services:
       - 5672:5672
       - 15672:15672
     volumes:
-      # - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
-      # - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
       - /var/lib/rabbitmq
     env_file:
       - .env
@@ -23,14 +21,14 @@ services:
     env_file:
       - .env
     depends_on:
-      # - database
+      - database
       - rabbitmq
     ports:
       - 3800:3800
     environment:
       NODE_ENV: development
       PORT: 3800
-      # DATABASE_URL: postgres://postgres:postgres@host.docker.internal:3802/main
+      DATABASE_URL: postgres://postgres:postgres@database:5432/ttf
       RABBITMQ_DEFAULT_USER: user
       RABBITMQ_DEFAULT_PASS: password
       RABBITMQ_USER: user
@@ -38,23 +36,24 @@ services:
       RABBITMQ_HOST: rabbitmq:5672
     restart: unless-stopped
     links:
-      # - database
+      - database
       - rabbitmq
     volumes:
       - ./src:/usr/src/app/src
     command: yarn run start:dev
+    # command: npx prisma migrate deploy ; node --max-http-header-size 50000 dist/main.js 
 
-  # database:
-  #   image: postgres:14.1-alpine
-  #   restart: unless-stopped
-  #   environment:
-  #     - POSTGRES_USER=postgres
-  #     - POSTGRES_PASSWORD=postgres
-  #   ports:
-  #     - '3802:5432'
-  #   volumes:
-  #     - db:/var/lib/postgresql/data
-  #     - ./db/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
+  database:
+    image: postgres:14.1-alpine
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - db:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
 
 volumes:
   db:
