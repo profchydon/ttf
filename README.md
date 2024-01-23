@@ -24,10 +24,19 @@ that reads the messages from the broker and prints them to the console.
 git clone https://github.com/profchydon/ttf.git
 ```
 
+```
+cd tff
+```
+
 ### Environmental Variables
 Ensure the .env file is available in the root directory
 
 ### Start application
-Open your terminal and run docker compose up.
+Open your terminal and run
+
+```
+docker compose up
+```
+
 Please keep the terminal open so you can see the result
 
