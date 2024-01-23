@@ -70,4 +70,4 @@ order(ascending) to a message broker (e.g. RabbitMQ) and set up a simple client
 that reads the messages from the broker and prints them to the console.
 
 
-To view result for invited customers, visit http://localhost:3800/send/invitation
+To view result for invited customers, visit http://localhost:3800/invitation/send
